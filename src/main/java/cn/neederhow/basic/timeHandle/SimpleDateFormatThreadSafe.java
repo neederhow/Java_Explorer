@@ -17,7 +17,7 @@ public class SimpleDateFormatThreadSafe {
     public static void main(String[] args) {
         SimpleDateFormatThreadSafe sdfts = new SimpleDateFormatThreadSafe();
         sdfts.exec("不安全方法",() -> {
-            try {//(3)使用单例日期实例解析文本
+            try {
                 return sdf.parse("2019-12-13 15:17:27");
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -26,7 +26,7 @@ public class SimpleDateFormatThreadSafe {
         });
 
         sdfts.exec("synchronized方法",() -> {
-            try {//(3)使用单例日期实例解析文本
+            try {
                 synchronized (sdf){
                     return sdf.parse("2019-12-13 15:17:27");
                 }
@@ -37,7 +37,7 @@ public class SimpleDateFormatThreadSafe {
         });
 
         sdfts.exec("每次新建对象方法",() -> {
-            try {//(3)使用单例日期实例解析文本
+            try {
                 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 return sdf1.parse("2019-12-13 15:17:27");
             } catch (ParseException e) {
@@ -52,7 +52,7 @@ public class SimpleDateFormatThreadSafe {
                 sdf = new SimpleDateFormat("yyyy-MM-hh");
                 threadLocal.set(sdf);
             }
-            try {//(3)使用单例日期实例解析文本
+            try {
                 return sdf.parse("2019-12-13 15:17:27");
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -78,14 +78,12 @@ public class SimpleDateFormatThreadSafe {
                 i -> {
                     try {
                         while (!i.isDone())
-                            ;//Future返回如果没有完成，则一直循环等待，直到Future返回完成
-                        i.get().getTime();     //打印各个线程（任务）执行的结果
+                        i.get().getTime();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     } finally {
-                        //启动一次顺序关闭，执行以前提交的任务，但不接受新任务
                         executorService.shutdown();
                     }
                 }
