@@ -4,24 +4,33 @@ import cn.neederhow.designPattern.creational.factoryMethod.product.Logger;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.file.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class FileLogger implements Logger {
     private String className;
-    private FileOutputStream fos;
 
     public FileLogger(String className) {
         this.className = className;
-        LocalDate now = LocalDate.now();
-        try {
-            fos = new FileOutputStream("log-" + now.getYear() + now.getMonth());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void log(String info) {
+        LocalDate now = LocalDate.now();
+        info = LocalDateTime.now().toString() + " " + className + ": " + info + "\n";
+        try {
+            Files.write(
+                    Paths.get("log-" + now.getYear() + now.getMonthValue()),
+                    info.getBytes(),
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
