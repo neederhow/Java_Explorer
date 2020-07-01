@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import com.itranswarp.learnjava.service.HtmlDocument;
+import cn.neederhow.designPattern.creational.abstractFactory.service.HtmlDocument;
 
 public class FastHtmlDocument implements HtmlDocument {
 
@@ -16,12 +16,13 @@ public class FastHtmlDocument implements HtmlDocument {
 
 	@Override
 	public String toHtml() {
-		return md.lines().map(s -> {
-			if (s.startsWith("#")) {
-				return "<h1>" + s.substring(1) + "</h1>";
-			}
-			return "<p>" + s + "</p>";
-		}).reduce("", (acc, s) -> acc + s + "\n");
+		return "";
+//		return md.lines().map(s -> {
+//			if (s.startsWith("#")) {
+//				return "<h1>" + s.substring(1) + "</h1>";
+//			}
+//			return "<p>" + s + "</p>";
+//		}).reduce("", (acc, s) -> acc + s + "\n");
 	}
 
 	@Override

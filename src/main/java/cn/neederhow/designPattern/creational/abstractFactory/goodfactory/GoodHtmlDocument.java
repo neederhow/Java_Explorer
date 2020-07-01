@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import com.itranswarp.learnjava.service.HtmlDocument;
+import cn.neederhow.designPattern.creational.abstractFactory.service.HtmlDocument;
 
 public class GoodHtmlDocument implements HtmlDocument {
 
@@ -16,13 +16,14 @@ public class GoodHtmlDocument implements HtmlDocument {
 
 	@Override
 	public String toHtml() {
-		String body = md.lines().map(s -> {
-			if (s.startsWith("#")) {
-				return "<h1>" + s.substring(1) + "</h1>";
-			}
-			return "<p>" + s + "</p>";
-		}).reduce("", (acc, s) -> acc + s + "\n");
-		return "<html>\n<body>\n" + body + "\n</body>\n</html>";
+		return "";
+//		String body = md.lines().map(s -> {
+//			if (s.startsWith("#")) {
+//				return "<h1>" + s.substring(1) + "</h1>";
+//			}
+//			return "<p>" + s + "</p>";
+//		}).reduce("", (acc, s) -> acc + s + "\n");
+//		return "<html>\n<body>\n" + body + "\n</body>\n</html>";
 	}
 
 	@Override
