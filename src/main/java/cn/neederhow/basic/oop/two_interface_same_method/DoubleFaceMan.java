@@ -1,6 +1,11 @@
 package cn.neederhow.basic.oop.two_interface_same_method;
 
+import java.lang.reflect.Field;
+
 public class DoubleFaceMan implements FaceA, FaceB {
+    String age;
+    Integer a;
+    int b;
     @Override
     public void creapySmile() {
         System.out.println("xixixixixi");
@@ -18,5 +23,11 @@ public class DoubleFaceMan implements FaceA, FaceB {
         man_a.creapySmile();
         FaceB man_b = man;
         man_b.creapySmile();
+
+        Field[] fs = DoubleFaceMan.class.getDeclaredFields();
+        for (Field f : fs) {
+            System.out.println(f.getName() + " " + f.getType());
+        }
+
     }
 }
